@@ -31,3 +31,22 @@ for x_axis_data, y_axis_data in [
     ('Eccentricity', 'Major_Axis_Length'),
 ]:
   px.scatter(rice_dataset, x=x_axis_data, y=y_axis_data, color='Class').show()
+
+px.scatter_3d(
+    rice_dataset,
+    x='Eccentricity',
+    y='Area',
+    z='Major_Axis_Length',
+    color='Class',
+).show()
+
+feature_mean = rice_dataset.mean(numeric_only=True)
+feature_std = rice_dataset.std(numeric_only=True)
+numerical_features = rice_dataset.select_dtypes('number').columns
+normalized_dataset = (
+    rice_dataset[numerical_features] - feature_mean
+) / feature_std
+normalized_dataset['Class'] = rice_dataset['Class']
+normalized_dataset.head()
+
+keras.utils.set_random_seed(42)
