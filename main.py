@@ -22,3 +22,12 @@ rice_dataset = rice_dataset_raw[[
 ]]
 
 rice_dataset.describe()
+
+for x_axis_data, y_axis_data in [
+    ('Area', 'Eccentricity'),
+    ('Convex_Area', 'Perimeter'),
+    ('Major_Axis_Length', 'Minor_Axis_Length'),
+    ('Perimeter', 'Extent'),
+    ('Eccentricity', 'Major_Axis_Length'),
+]:
+  px.scatter(rice_dataset, x=x_axis_data, y=y_axis_data, color='Class').show()
